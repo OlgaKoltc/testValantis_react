@@ -7,9 +7,9 @@ const Goods = ({ goods, loading }) => {
 
   return (
     <ul>
-      {goods.map((item, index) => {
-        <li>{item.id}</li>;
-      })}
+      {/* {goods.map((item, index) => {
+        <li key={index}>{item}</li>;
+      })} */}
     </ul>
   );
 };

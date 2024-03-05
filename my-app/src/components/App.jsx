@@ -38,20 +38,42 @@ function App() {
           headers: { "Content-Type": "application/json", "X-Auth": authString },
           body: JSON.stringify({
             action: "get_ids",
-            // params: { offset: Math.abs(), limit: Math.abs() },
+            params: body,
           }),
-        });
-        const goods = await res.json();
-        setGoods(goods);
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((result) => {
+            console.log(result);
+          });
+        // const goods = await res.json();
+        //setGoods(goods.result);
+        console.log(goods);
         setLoading(false);
-        console.log(goods.action);
-        // res.json().then();
       } catch (err) {
         // alert("Что-то пошло не так, пожалуйста перезагрузите страницу...");
         console.log(err);
       }
     };
-    getGoods();
+    // .then((res) => {
+    //   res.json().then((goods) => {
+    //     let result = goods;
+    //     if (result !== undefined) {
+    //       console.log(typeof goods.result);
+    //return result;
+    // });
+    const getId = async (offset = 0, limit = 10) => {
+      getGoods("get_id", { offset, limit });
+    };
+
+    const getItem = async (id) => {
+      if (!id || id.length === 0) {
+        setGoods(null);
+        return;
+      }
+      getGoods("get_items", { id });
+    };
   }, []);
 
   return (
